@@ -1,0 +1,298 @@
+<html>
+<head>
+<title>Chrome Extensions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type='text/javascript' src='js/jquery-1.7.1.min.js'> </script>
+<script type='text/javascript'>
+$(document).ready(function() {
+  $("a[href*=#]").bind("click",function(event){
+    event.preventDefault();
+    console.log('you');
+    var target = $(this).attr("href");
+    $("html, body").stop().animate({
+      scrollTop: $(target).offset().top,
+      scrollLeft: $(target).offset().left,
+    }, 1500,function(){
+      location.href = target;
+    });
+  });
+  
+  $('body').bind("keydown",function(event){
+    if(event.keyCode == '40' || event.keyCode == '39') {
+      var x = location.href;
+      var currentSlideNumber = x.split('#slide')[1];
+      var nextSlideNumber = 2;
+      if(currentSlideNumber){
+          var nextSlideNumber = parseInt(currentSlideNumber) + 1;
+      }
+      var target = '#slide'+ nextSlideNumber;
+      $("html, body").stop().animate({
+        scrollTop: $(target).offset().top,
+        scrollLeft: $(target).offset().left,
+      }, 800,function(){
+      location.href = target;
+      });
+    } else if(event.keyCode == '38' || event.keyCode == '37') {
+      var x = location.href;
+      var currentSlideNumber = x.split('#slide')[1];
+      var nextSlideNumber = parseInt(currentSlideNumber) - 1;
+      var target = '#slide'+ nextSlideNumber;
+      $("html, body").stop().animate({
+        scrollTop: $(target).offset().top,
+        scrollLeft: $(target).offset().left,
+      }, 800,function(){
+      location.href = target;
+      });
+    }
+  });
+});
+</script>
+
+<style>
+html,body{
+margin:0px;
+padding:0px;
+height:100%;
+}
+
+body{
+ overflow:hidden;
+}
+
+.slide{
+  height:100%;
+  width:90%;
+  background:-webkit-gradient(radial,
+                            50% 50%, 0,
+                            50% 50%, 500,
+                            from(white), to(#A2D2ED)) no-repeat #A2D2ED;
+  padding:100px;
+}
+
+.slide:not(#slide1){
+  background:rgba(255,255,255,0.5);
+  background-position:bottom right;
+  background-repeat: no-repeat;
+}
+
+#slide1 span{
+  font-size:108px;
+  text-align:middle;
+  text-shadow: 2px 2px 12px black;
+}
+
+.slideHead{
+  position:relative;
+  font-size:40px;
+}
+
+.content li{
+  margin-left:40px;
+  font-size:34px;
+}
+
+.content li img{
+  margin:10px;
+  margin-left:80px;
+  border-radius:10px;
+  box-shadow:0px 0px 2px green;
+}
+
+.content img{
+  margin:20px;
+  border-radius:10px;
+  box-shadow:0px 0px 5px green;
+}
+
+hint{
+  position:fixed;
+  top:10px;
+  right:10px;
+  font-size:16px;
+}
+
+pre{
+  margin-left:70px;
+  border-radius:5px;
+  box-shadow:inset 0px 0px 10px green;
+  display:block;
+  width:80%;
+  padding-top:10px;
+  font-size: xx-large;
+}
+</style>
+</head>
+<body>
+
+<hint>Для навигации используйте &uarr;/&darr;</hint>
+<section class='slide' id='slide1'>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+<span>Вспомним HTML</span>
+</section>
+<section class='slide' id='slide2'>
+  <span class='slideHead'>HTML</span><br/>
+  <span class='content'>
+    <li>HyperText Markup Language (язык разметки гипертекста) - тэговый язык разметки документов</li>
+    <li>термин, введённый Тедом Нельсоном в 1965 году для обозначения «текста ветвящегося или выполняющего действия по запросу»</li>
+    <li>текст, сформированный с помощью языка разметки, содержащий в себе гиперссылки</li>
+    <li>для передачи гипертекстовых документов применяется протокол HTTP (протокол передачи гипертекста) версии 1.1 (RFC 2616).</li>
+  </span>
+  <br/><br/>
+  <span class='slideHead'>Гиперссылка</span><br/>
+  <span class='content'>
+    <li>часть гипертекстового документа, ссылающаяся на другой элемент (команда, текст, заголовок, примечание, изображение) в самом документе, на другой объект (файл, каталог, приложение), расположенный на локальном диске или в компьютерной сети, либо на элементы этого объекта.</li>
+    <li>служит для связи документов</li>
+  </span>
+</section>
+<section class='slide' id='slide3'>
+  <span class='slideHead'>Сервер</span><br/>
+  <span class='content'>
+    <li>программное обеспечение</li>
+    <li>обслуживает запросы от клиентов</li>
+  </span>
+  <br/><br/>
+  <span class='slideHead'>Клиент</span><br/>
+    <span class='content'>
+      <li>программное обеспечение. (Например браузер)</li>
+      <li>выполняет запросы к серверу</li>
+      <li>отображает ответы сервера пользователю</li>
+  </span>
+</section>
+<section class='slide' id='slide4'>
+  <span class='slideHead'>Взаимодействие клиента с сервером</span><br/>
+  <span class='content'>
+    <li>поиск IP адреса сервера при помощи системы доменных имен (DNS)</li>
+    <li>установка соединения с сервером (стандартно на 80 порт)</li>
+    <li>HTTP запрос (request) клиента к серверу</li>
+    <li>HTTP ответ (response) сервера клиенту</li>
+    <img src='img/synchronous_sequence.gif' style='width:40%;padding-top:30px' />
+   <img src='img/asynchronous_sequence.gif' style='width:30%;padding-top:30px' />
+  </span>
+</section>
+<section class='slide' id='slide5'>
+  <span class='slideHead'>HTTP запрос</span><br/>
+  <span class='content'>
+    <li>состоит из заголовка запроса и тела запроса, разделенные пустой строкой. Тело запроса может отсутствовать.</li>
+    <li>методы (иначе говоря, команда HTTP)</li>
+    <li>параметры</li>
+  </span>
+  <br/> <br/>
+  <span class='slideHead'>Методы запроса</span><br/>
+  <span class='content'>
+    <li>GET - запрос документа</li>
+    <li>HEAD - запрос заголовка документа</li>
+    <li>POST - этот метод применяется для передачи данных. Сами данные следуют в последующих строках запроса в виде параметров</li>
+    <li>PUT - разместить  документ  на  сервере (используется редко).  Запрос  с  этим методом имеет тело, в котором передается сам документ.</li>
+    <li>Ресурс - это путь к определенному файлу на сервере, который клиент хочет получить</li>
+    <li>Версия протокола - версия протокола HTTP, с которой работает клиентская программа.</li>
+  </span>
+</section>
+<section class='slide' id='slide6'>
+  <span class='slideHead'>HTTP ответ</span><br/>
+  <span class='content'>
+      <li>состоит из заголовка и тела, разделенные пустой строкой.</li>
+      <li>версия протокола - аналогичен соответствующему параметру запроса.</li>
+      <li>код ошибки - кодовое обозначение "успешности" выполнения запроса. Код 200 означает "все нормально" (OK).</li>
+      <li>словесное описание ошибки - "расшифровка" предыдущего кода. Например для 200 это OK, для 500 - Internal Server Error.</li>
+      <li>параметры</li>
+  </span>
+</section>
+<section class='slide' id='slide7'>
+  <span class='slideHead'>Пример запроса к серверу при помощи telnet</span><br/>
+  <span class='content'>
+   <pre>
+   $ telnet google.com 80
+   Trying 173.194.32.37...
+   Connected to google.com.
+   Escape character is '^]'.
+   GET /search?q=hacker HTTP/1.1
+
+   HTTP/1.1 200 OK
+   Date: Wed, 25 Apr 2012 11:21:56 GMT
+   ....
+  </pre>
+  </span>
+</section>
+<section class='slide' id='slide8'>
+  <span class='slideHead'>HTML редакторы</span><br/>
+  <span class='content'>
+    <li><a href="http://projects.gnome.org/gedit/">Gedit</a> (win/linux)</li>
+    <li><a href="http://www.eclipse.org/webtools/">Eclipse webtools</a> (любая)</li>
+    <li><a href="http://notepad-plus-plus.org/">Notepad++</a> (win)</li>
+    <li><a href="http://www.jetbrains.com/webstorm/">WebStorm</a> (любая $)</li>
+    <li><a href="http://macromates.com/">TextMate</a> (mac OS $)</li>
+    <li><a href="http://www.sublimetext.com/">Sublime Text</a> (любая $)</li>
+    <li><a href="http://www.adobe.com/ru/products/dreamweaver.html">Adobe Dreamweaver</a> (win/mac OS $)</li>
+  </span>
+</section>
+<section class='slide' id='slide9'>
+  <span class='slideHead'>Периодическая таблица HTML тэгов</span><br/>
+  <span class='content'>
+    <li>Чтобы браузер при отображении документа понимал, что имеет дело не с простым текстом, а с элементом форматирования и применяются теги</li>
+    <pre>
+        &lt;тег атрибут1="значение" атрибут2="значение"&gt;
+        &lt;тег атрибут1="значение" атрибут2="значение"&gt;...&lt;/тег&gt;
+    </pre>
+  </span>
+  <a href="http://joshduck.com/periodic-table.html"><img src='img/periodic_html_table.png' style='width:70%;padding-top:30px' /></a></br></br>
+  <a href="http://joshduck.com/periodic-table.html">http://joshduck.com/periodic-table.html</a>
+</section>
+<section class='slide' id='slide10'>
+    <span class='slideHead'>Структура HTML-документа</span><br/>
+    <span class='content'>
+        <li>Любой документ на языке HTML представляет собой набор элементов, причём начало и конец каждого элемента обозначается специальными пометками — тегами.</li>
+        <li>элементы могут быть пустыми</li>
+        <li>элементы могут иметь атрибуты, определяющие какие-либо их свойства</li>
+        <li>регистр, в котором набрано имя элемента и имена атрибутов, в HTML значения не имеет</li>
+        <br/>
+        <pre>
+&lt;strong&gt;Текст между — открывающим и закрывающим.&lt;/strong&gt;
+&lt;a href="http://www.example.com"&gt;элемент содержит атрибут href.&lt;/a&gt;
+А вот пример пустого элемента: &lt;br&gt;
+        </pre>
+        <li>элементы могут быть вложенными</li>
+        <pre>
+&lt;b&gt;Этот текст будет полужирным,
+&lt;i&gt;а этот - ещё и курсивным&lt;/i&gt;
+&lt;/b&gt;
+        </pre>
+    </span>
+</section>
+<section class='slide' id='slide11'>
+  <span class='slideHead'><a href="examples">Примеры</a></span><br/>
+  <span class='content'>
+  <span class='content'>
+    <li>Корневой тэг &lt;html&gt;...&lt;/html&gt; - говорит браузеру, что содержит HTML</li>
+    <li>&lt;head&gt;...&lt;/head&gt; - содержит информацию о документе</li>
+    <li>&lt;body&gt;...&lt;/body&gt; - отображаемое содержимое документа</li>
+  </span>
+  <pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Изучаем HTML&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+Содержимое документа
+&lt;/body&gt;
+&lt;/html&gt;
+  </pre>
+  </span>
+</section>
+<div class='demo_explainer'>
+     <a href='http://prophp.ru/forum'>ProPHP.ru</a> | Задать вопросы на форуме
+  </div>
+  </span>
+</section>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+  <link rel="stylesheet" href="allcss.css" type="text/css">
+
+</body>
+</html>
