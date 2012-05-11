@@ -10,7 +10,7 @@
 <p>
     Формы позволяют пользователям произвести выбор, отправить информацию или загрузить файлы на сайт.
     Например, они могут быть использованы для входа на сайт, для оформления заказа или оставления комментариев.
-    Элементу &lg;form&gt; требуется несколько атрибутов: action и method.
+    Элементу &lt;form&gt; требуется несколько атрибутов: action и method.
     <ul>
     <li>Атрибут action указывает адрес расположения файла(скрипта), который будет обрабатывать данные формы.</li>
     <li>Атрибут method может принимать следующие значения: GET и POST.
@@ -34,11 +34,112 @@
     Программу, которая работает по такому интерфейсу совместно с веб-сервером, принято называть шлюзом,
     хотя многие предпочитают названия «скрипт» (сценарий) или «CGI-программа».
 </p>
+<p>
+    Подавляющее большинство элементов форм
+    создается посредством использования элемента &lt;input&gt;, имеющего обязательные атрибуты:
+    <ul>
+    <li>name – задает имя элементу формы, которое потребуется для последующей обработки</li>
+    <li>type – определяет тип элемента формы</li>
+    </ul>
+</p>
+<hr/>
 <form>
     Имя:<br>
     <input type="text" name="firstname"> <br> Фамилия:<br>
-    <input type="text" name="lastname" value="Иванов" >
+    <input type="text" name="lastname" value="Иванов" ><br/>
+    <input type="password" name="pass">
+    <input type="hidden" name="secure" value="Some secret value">
+</form>
+<form>
+    Укажите Ваш пол: <br>
+    <input type="radio" name="sex" value="male" checked="checked"> мужчина <br>
+    <input type="radio" name="sex" value="female"> женщина
+</form>
+<form>
+    В этом году я собираюсь приобрести: <br>
+    <input type="checkbox" name="computer" checked="checked"> Компьютер
+    <br>
+    <input type="checkbox" name="notebook"> Ноутбук
+    <br>
+    <input type="checkbox" name="printer"> Принтер
+    <br>
+    <input type="checkbox" name="scanner" checked="checked"> Сканер
+</form>
+<hr/>
+<p>
+Кнопки:
+<ul>
+    <li>submit - создает кнопку для отправки данных формы на обработку.</li>
+    <li>reset - выполняет перезагрузку формы (сбрасывает все введенные пользователем данные).</li>
+    <li>button - создает пользовательскую кнопку. Чаще всего используется при организации управления скриптами.</li>
+</ul>
+</p>
+<hr/>
+<form method="get" action="http://yandex.ru/yandsearch" >
+    Найти:
+    <input type="text" name="text" size=20>
+    <br>
+    <input type="submit">
+    <input type="reset">
 </form>
 
+<hr/>
+<form>
+    Прикрепить файл: <br>
+    <input type="file" size="25">
+</form>
+<hr/>
+<form>
+    Выберите размер в дюймах
+    <select name="tft">
+        <option value="12">12"
+        <option value="13">13"
+        <option value="14">14"
+        <option value="15">15"
+        <option value="16" selected="selected">16"
+        <option value="17">17"
+    </select>
+</form>
+<hr/>
+<form>
+    Выберите производителя:<br>
+    <select name="notebook" multiple size=6>
+        <option value="aser">Aser
+        <option value="asus">Asus <option value="compaq" selected="selected">Compaq
+        <option value="hp">HP
+        <option value="sony" selected="selected">Sony
+        <option value="toshiba">Toshiba
+    </select>
+</form>
+<hr/>
+
+<form>
+    <textarea rows="7" cols="30">
+        блаблаблабла блаблаблабла блаблаблабла блаблаблабла блаблаблабла блаблаблабла блаблаблабла блаблаблабла
+    </textarea>
+</form>
+<hr/>
+<form >
+
+    <fieldset>
+        <legend>Личные данные</legend>
+        Имя:
+        <input type="text" name="firstname" value="Билл"> <br>
+        Фамилия:
+        <input type="text" name="lastname" value="Гейтс"> <br>
+        Пол:
+        <input type="radio" name="Sex" value="Male" checked="checked"> Мужской
+
+        <input type="radio" name="Sex" value="Female"> Женский
+    </fieldset>
+    <fieldset>
+        <legend>Данные о работе</legend>
+        Место работы:
+        <input type="text" name="work" value="Microsoft"> <br>
+        Должность:
+        <input type="text" name="status" value="Президент">
+    </fieldset>
+    <input type="submit" value="отправить">
+</form>
 </body>
 </html>
